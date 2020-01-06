@@ -7,8 +7,10 @@ from immospider.items import ImmoscoutItem
 class ImmoscoutSpider(scrapy.Spider):
     name = "immoscout"
     allowed_domains = ["immobilienscout24.de"]
-    # start_urls = ['https://www.immobilienscout24.de/Suche/S-2/Wohnung-Miete/Berlin/Berlin']
-    # start_urls = ['https://www.immobilienscout24.de/Suche/S-2/Wohnung-Miete/Berlin/Berlin/Lichterfelde-Steglitz_Nikolassee-Zehlendorf_Dahlem-Zehlendorf_Zehlendorf-Zehlendorf/2,50-/60,00-/EURO--800,00/-/-/']
+    # start_urls = [
+    #     'https://www.immobilienscout24.de/Suche/radius/wohnung-kaufen?centerofsearchaddress=M%C3%BCnchen%20(Kreis);;;1276002060;Bayern;&numberofrooms=2.0-&price=1.0-500000.0&livingspace=60.0-&geocoordinates=48.1064;11.6213;15.0&enteredFrom=result_list',
+    #     'https://www.immobilienscout24.de/Suche/de/bayern/muenchen-kreis/haus-kaufen?numberofrooms=3.0-&enteredFrom=one_step_search'
+    # ]    
 
     # The immoscout search results are stored as json inside their javascript. This makes the parsing very easy.
     # I learned this trick from https://github.com/balzer82/immoscraper/blob/master/immoscraper.ipynb .
@@ -49,7 +51,7 @@ class ImmoscoutSpider(scrapy.Spider):
                     item['zip_code'] = address['postcode']
                     item['district'] = address['quarter']
 
-                    item["rent"] = data["price"]["value"]
+                    item["price"] = data["price"]["value"]
                     item["sqm"] = data["livingSpace"]
                     item["rooms"] = data["numberOfRooms"]
 
@@ -93,6 +95,6 @@ class ImmoscoutSpider(scrapy.Spider):
         if next_page_list:
             next_page = next_page_list[-1]
             print("Scraping next page", next_page)
-            if next_page:
+            if next_page:                
                 next_page = response.urljoin(next_page)
                 yield scrapy.Request(next_page, callback=self.parse)

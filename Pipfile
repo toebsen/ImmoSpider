@@ -11,12 +11,8 @@ pandas = "*"
 scipy = "*"
 matplotlib = "*"
 seaborn = "*"
-tpot = "*"
-googlemaps = "*"
-yacron = "*"
-sendgrid = ">=5.0,<6.0"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6.5"
+python_version = "3"

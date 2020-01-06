@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Define here the models for your scraped items
-#
-# See documentation in:
-# http://doc.scrapy.org/en/latest/topics/items.html
-
 import scrapy
 
 
@@ -23,7 +18,7 @@ class ImmoscoutItem(scrapy.Item):
     lat = scrapy.Field()
     lng = scrapy.Field()
     sqm  = scrapy.Field()
-    rent = scrapy.Field()
+    price = scrapy.Field()
     rooms = scrapy.Field()
     extra_costs = scrapy.Field()
     kitchen = scrapy.Field()

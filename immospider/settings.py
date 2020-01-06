@@ -2,19 +2,12 @@
 
 # Scrapy settings for immospider project
 #
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     http://doc.scrapy.org/en/latest/topics/settings.html
-#     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'immospider'
 
 SPIDER_MODULES = ['immospider.spiders']
 NEWSPIDER_MODULE = 'immospider.spiders'
 
-# log output to stdout instead of stderr
 LOG_STDOUT = True
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -22,6 +15,12 @@ LOG_STDOUT = True
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+
+
+FEED_STORAGES_BASE = {
+    '': 'immospider.customexport.CustomFileFeedStorage',
+    'file': 'immospider.customexport.CustomFileFeedStorage',
+}
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -60,17 +59,17 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
-EXTENSIONS = {
-     'immospider.extensions.SendMail': 100,	
-#    'scrapy.extensions.telnet.TelnetConsole': None,
-}
+# EXTENSIONS = {
+#      'immospider.extensions.SendMail': 100,	
+# #    'scrapy.extensions.telnet.TelnetConsole': None,
+# }
 
-# Configure item pipelines
-# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'immospider.pipelines.DuplicatesPipeline': 500,
-    'immospider.pipelines.GooglemapsPipeline': 300,
-}
+# # Configure item pipelines
+# # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+# ITEM_PIPELINES = {
+#     'immospider.pipelines.DuplicatesPipeline': 500,
+#     'immospider.pipelines.GooglemapsPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
