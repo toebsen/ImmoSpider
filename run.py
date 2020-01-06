@@ -18,7 +18,7 @@ def _get_file_path(query_type, suffix="csv"):
 def main(*, query_type, url):
     
     file_path = _get_file_path(query_type)
-    process = CrawlerProcess({**get_project_settings(), "FEED_URI" : file_path})
+    process = CrawlerProcess({**get_project_settings(), "FEED_URI" : file_path, "FEED_FORMAT": "csv"})
     process.crawl('immoscout', url=url)
     process.start()
     process.join()

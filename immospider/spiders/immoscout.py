@@ -25,28 +25,25 @@ class ImmoscoutSpider(scrapy.Spider):
         print(response.url)
 
         for line in response.xpath(self.script_xpath).extract_first().split('\n'):
-            if line.strip().startswith('resultListModel'):
-                immo_json = line.strip()
+            if line.strip().startswith('resultListModel'):                
+                immo_json = line.strip()                
                 immo_json = json.loads(immo_json[17:-1])
 
-                #TODO: On result pages with just a single result resultlistEntry is not a list, but a dictionary.
-                #TODO: So extracting data will fail.
                 for result in immo_json["searchResponseModel"]["resultlist.resultlist"]["resultlistEntries"][0]["resultlistEntry"]:
-
+                   
                     item = ImmoscoutItem()
-
                     data = result["resultlist.realEstate"]
-
-                    # print(data)
 
                     item['immo_id'] = data['@id']
                     item['url'] = response.urljoin("/expose/" + str(data['@id']))
+
                     item['title'] = data['title']
                     address = data['address']
                     try:
                         item['address'] = address['street'] + " " + address['houseNumber']
                     except:
                         item['address'] = None    
+
                     item['city'] = address['city']
                     item['zip_code'] = address['postcode']
                     item['district'] = address['quarter']
