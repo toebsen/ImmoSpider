@@ -10,7 +10,7 @@ def _get_file_path(query_type, suffix="csv"):
     dir_path = os.path.dirname(os.path.realpath(__file__))
     filename = f"{query_type}_{datetime.date.today()}.{suffix}"
 
-    data_path = os.path.join(dir_path, "..", "DATA", query_type)
+    data_path = os.path.join(dir_path, "DATA", query_type)
     if not os.path.exists(data_path):
         os.makedirs(data_path)
     return os.path.join(data_path, filename)
