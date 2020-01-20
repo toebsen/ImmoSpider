@@ -40,6 +40,6 @@ def main(*, query_type, url):
     _post_process(query_type, suffix="csv")
 
 if __name__ == "__main__":
-    main(query_type="apartment_buy", url='https://www.immobilienscout24.de/Suche/de/bayern/muenchen-kreis/wohnung-kaufen?numberofrooms=2.0-&price=-1000000.0&livingspace=60.0-')
+    main(query_type="apartment_buy", url='https://www.immobilienscout24.de/Suche/radius/wohnung-kaufen?centerofsearchaddress=M%C3%BCnchen;;;;;&numberofrooms=2.0-&price=-1000000.0&livingspace=60.0-&geocoordinates=48.15437;11.54199;20.0')
 
 
